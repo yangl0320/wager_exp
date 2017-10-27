@@ -1,0 +1,134 @@
+<template name="training_image_game">
+    <div id="welcome-instruction" class="instruction">
+        <!--<h2>Training Round <span id="round-number">{{roundNum}}</span></h2>-->
+        <h2> Training Phrase </h2>
+        <h4> <strong> Forecasting question example:</strong> </h4>
+        <div id="imageArea">
+            <img src="/images/1.png">
+        </div>
+        <h4>Please fill in your probability and press try:</h4>
+        <div id="inputArea" align="center">
+            <form id="simulateForm" onSubmit="return false">
+                <table id="simulation-table" class="bordertable">
+                    <tr>
+                        <td>
+                            <h5> Your graphical prediction:</h5>
+                        </td>
+                        <td colspan="3">
+                            <table id="pred-bars" class="nobordertable">
+                                <tr>
+                                    <td>
+                                        <h5 align="right">Happens:</h5></td>
+                                    <td>
+                                        <input type="range" id="ansBar1" name="posBar" min="0.0" max="1.0" step="0.05" value="0.5" list="tickmarks">
+                                    </td>
+                                    <td align="left">
+                                        {{posPred}}
+                                        <!--<output align="left" name="posPred" for="posBar negBar" value="0.5"></output>-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h5 align="right">Not Happen:</h5></td>
+                                    <td>
+                                        <input type="range" id="ansBar2" name="negBar" min="0.0" max="1.0" step="0.05" value="0.5" list="tickmarks">
+                                    </td>
+                                    <td align="left">
+                                        {{negPred}}
+                                        <!--<output align="left" name="negPred" for="posBar negBar" value="0.5"></output>-->
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h5> Your prediction:</h5>
+                            <h5> Valid value: 0.01,0.02,...,1.00</h5>
+                        </td>
+                        <td>
+                            <input type="number" id="sim-pred" name="sim-pred" min="0.00" max="1.00" step="0.05" value="0.5">
+                        </td>
+                        <td>
+                            <h5> Your bet: </h5>
+                            <h5> Valid value: 0.1, 0.2, ..., 1.0</h5>
+                        </td>
+                        <td>
+                            <input type="number" id="sim-wager" name="sim-wager" min="1" max="3" step="1" value="3">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h5> Opponent 1's prediction:</h5>
+                            <h5> Valid value: 0.1,0.2,...,1.0</h5>
+                        </td>
+                        <td>
+                            <input type="number" id="bot1-pred" name="bot1-pred" min="0.1" max="0.9" step="0.1" value="0.5">
+                        </td>
+                        <td>
+                            <h5> Opponent 1's bet: </h5>
+                            <h5> Valid value: 1, 2, ..., 10</h5>
+                        </td>
+                        <td>
+                            <input type="number" id="bot1-wager" name="bot1-wager" min="1" max="3" step="1" value="3">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h5> Opponent 2's prediction:</h5>
+                            <h5> Valid value: 0.1,0.2,...,1.0</h5>
+                        </td>
+                        <td>
+                            <input type="number" id="bot2-pred" name="bot2-pred" min="0.1" max="0.9" step="0.1" value="0.5">
+                        </td>
+                        <td>
+                            <h5> Opponent 2's bet: </h5>
+                            <h5> Valid value: 1, 2, ..., 10</h5>
+                        </td>
+                        <td>
+                            <input type="number" id="bot2-wager" name="bot2-wager" min="1" max="3" step="1" value="3">
+                        </td>
+                    </tr>
+                </table>
+                <div id="loadingDBArea">
+                    <h5 id="loadingDB" style="visibility: hidden">
+                        Loading data unfinished. Loading {{loadingTimer}}sec/ around 15~25 sec.
+                    </h5>
+                    <h5 id="tryWarning"> Try at least twice to enter into real forecast task. </h5>
+                </div>
+                <div id="submitArea">
+                    <button type="submit" class="btn" id="submit"> Try </button>
+                    <!--<h4 align="center">Your prediction is {{worker_forecast}}. Your total bet is {{worker_bet}}.</h4>-->
+                </div>
+            </form>
+        </div>
+        <div id="resultArea" style="visibility: hidden;">
+            <h4 align="center">Your prediction is {{worker_forecast}}. Your total bet is {{worker_bet}}.</h4>
+            <br>
+            <div id="betStrategy" align="center">
+                <h5>Your strategy is to bet {{posBet}} on the event happening and bet {{negBet}} on the opposite.</h5>
+                <h5>Opponent 1's strategy is to bet {{bot1posBet}} on the event happening and bet {{bot1negBet}} on the opposite.</h5>
+                <h5>Opponent 2's strategy is to bet {{bot2posBet}} on the event happening and bet {{bot2negBet}} on the opposite.</h5>
+                <br>
+                <h5>Your netpayoff is {{pay1}} if the event happens and {{pay2}} if the event doesn't happen.</h5>
+            </div>
+        </div>
+        <div id="enterRealTask" align="center" style="visibility: hidden;">
+            <button type="button" class="btn" id="enter-forecast-btn-util">
+                Real Tasks
+            </button>
+        </div>
+        <!--<div id="answerArea">
+<div id="answerAreaLeft">
+  <button type="button" class="btn" id="submit-yes">Yes</button>
+</div>
+<div id="answerAreaRight">
+  <button type="button" class="btn" id="submit-no">No</button>
+</div>
+</div>-->
+        <div id="buttonArea">
+            <a href="" class="btn" style="visibility: hidden;" id="welcome-btn">Next Round</a>
+            <a href="" class="btn" style="visibility: hidden;" id="next-btn">Done, onto real tasks</a>
+        </div>
+    </div>
+</template>

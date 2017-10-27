@@ -1,0 +1,1 @@
+FinishedWorkers = new Meteor.Collection('finishedWorkers');

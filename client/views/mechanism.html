@@ -1,0 +1,46 @@
+<template name="mechanism">
+    <div id="welcome-instruction" class="instruction">
+        <h2> Training Phrase </h2>
+        <h4> <strong> Task description: </strong>
+		<br> 
+        This training phrase aims to give you an intuitive idea about what the forecast question looks like and how the forecast elicitation mechanism works. 
+    	</h4>
+        <h4> <strong> Forecast Task </strong> </h4>
+        <h5> Our forecast task is a betting-like task, where you competes with other potential participants. The task consists of 10 questions. Each question will ask you to report a probability you think that a given event X will happen within one week. You are also asked to specify an amount of money, called bet, from the budget we assign to you, on each question to "support" the probability you forecast. Then, we will use the proxy pari-mutuel mechanism to compute your bouns, based on your proability forecast, your bet, the outcome of event X as well as the others' forecasts and bets. </h5>
+        <h4> <strong> Example question </strong> </h4>
+        <form id="exampleForm" onSubmit="return false">
+            <table id="exampleTable" class="bordertable" align="center">
+                <tr>
+                    <td colspan="4">
+                    	<img src="/images/exampleQ.png" id="exampleImg" align="left" 
+                    	width="750" height="60">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h5> Forecast </h5>
+                    </td>
+                    <td>
+                        <input type="range"  min="0.0" max="1.0" step="0.001" value="0.5">
+                        <input type="number"  min="0.00" max="1.00" required>
+                    </td>
+                    <td>
+                        <h5> Bet </h5>
+                    </td>
+                    <td>
+                    	<input type="number"  min="0.00" max="1.00" required>
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <h4> <strong> Proxy Pari-mutuel Mechanism </strong> </h4>
+        <h5> In proxy pari-mutual mechanism, all participants report their happenning probabilities of an eveny X as well as their bud
+
+		The mechanism we use to calculate your bonus is the proxy pari-mutuel game. The core of the mechanism is the (non-proxy) pari-mutuel mechanism. In this game, you can put certain amount of money, called bet, on two of the potential outcomes of the forecast questions. After one of the outcome is realized, the total money of all participants invested on the two outcomes will be splited to each of you propotinal to the portion of your bet on the outcome in the whole bet of the outcome. In the proxy pari-mutuel mechanism, a proxy will ask your total budget and your probability prediction of these two outcomes, and the proxy will compute the best beting strategy for the pari-mutuel game, and give your the final money of that game.
+    	</h5>
+        <h4>Whenever you are ready, click on the button below to proceed. Enjoy the task!</h4>
+    </div>
+    <div id="buttonArea">
+        <a href="" class="btn" id="welcome-btn">Next</a>
+    </div>
+</template>

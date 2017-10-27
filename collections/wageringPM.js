@@ -1,0 +1,1 @@
+WageringPM = new Meteor.Collection('wageringPM');
