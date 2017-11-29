@@ -1,0 +1,23 @@
+<template name="BrierRealTask">
+    <div id="welcome-instruction" class="instruction">
+        <h2 style="margin: 0 0 10px">Task Round {{setNum}}</h2>
+        <h4> In this round, you are given 5 real-world events to predict. <br> Please specify how likely each event will happen from 0 to 1. 
+        </h4>
+        <div id="formArea" class="instruction">
+            <form id="taskForm" onSubmit="return false">
+                <table id="taskTable{{num}}" border="1" align="center" style="border-spacing: 1px">
+                    {{#each tasks}} 
+                        {{>taskBrier}} 
+                    {{/each}}
+                </table>
+                <br>
+                <h5 id="allocateAllPointsWarning" style="visibility: hidden; color: red;text-align: center;"> 
+                    <strong> You haven't allocate all 100 points! </strong>
+                </h5>
+                <div id="submitArea" style="text-align: center;">
+                    <button type="submit" class="btn" id="submit" style="width: 250px"> Comfirm and go to next round </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</template>

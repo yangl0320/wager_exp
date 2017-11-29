@@ -1,8 +1,4 @@
-Template.training_to_real.rendered=function(){
-	$('html,body').scrollTop(0);
-};
-
-Template.training_to_real.events={
+Template.surrogate.events={
   'click #prevBtn': function(event, instance) {
         event.preventDefault();
         if (assignment_Id == "ASSIGNMENT_ID_NOT_AVAILABLE") {
@@ -27,8 +23,17 @@ Template.training_to_real.events={
                 Router.go('/error');
             } else {
                 //Router.go('/training_candy_game');
-                Router.go('/real_task');
+                Router.go('/beforeRealTask');
             }
         }
     }
+};
+
+Template.surrogate.rendered=function(){
+    $('html,body').scrollTop(0);
+};
+
+Template.surrogate.created = function() {
+    timeSeries.push(Date.now().toString()+' surrogate');
+    console.log(timeSeries);
 };

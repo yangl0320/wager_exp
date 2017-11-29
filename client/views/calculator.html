@@ -1,0 +1,126 @@
+<template name="calculator">
+    <div id="welcome-instruction" class="instruction">
+        {{> tutoralHeader}}
+        <!--h5 style="text-align: center"> <strong>This tutoral aims to help you hit more bonus by getting you familar with the  procedure and forecasting game mechanics!</strong> </h5-->
+        <hr style="border-width: 2px; margin: 1px 0px 15px;">
+        <table class="bordertable" style="text-align: center;">
+            <tr>
+                <td width="250">Step 1. Procedure & Rules</td>
+                <td width="250">Step 2. Reward Mechanism</td>
+                <td width="250" style="color: red;">Step 3. Tutorial</td>
+                <td width="150"> Finish Tutorial!</td>
+            </tr>
+        </table>
+        <br>
+        <div>
+            <h5 style="float: right;"> 
+                <!--table style="border:3px outset; border-spacing: 0px"><tr><td-->
+                    &nbsp;Suggested reading time: 2 minutes&nbsp;
+                <!--/td></tr></table-->
+            </h5>
+            <h4 style="float: left;"> <strong> Calculator </strong> </h4>
+        </div>
+        <div style="clear: both;"></div>
+        <h5> We are providing a simple reward calculator for our betting mechanism here. In this calculator, you can specify your prediction and point allocation as well as those of the other two participants. The calculator will show your reward. You can play with this calculator to further understand the mechanism. 
+        </h5>
+        <br>
+        <table align="center" width="100%" border="1">
+            <tr>
+                <td style="padding: 5px;">
+                    <div id="inputArea" align="center">
+                        <h4> <strong>Calculator</strong></h4>
+                        <h4>
+                        <form id="simulateForm" onSubmit="return false" oninput="pred1Box.value=parseFloat(pred1Bar.value).toFixed(1); pred2Box.value=parseFloat(pred2Bar.value).toFixed(1); pred3Box.value=parseFloat(pred3Bar.value).toFixed(1)">
+                            <table id="exampleTable" border="1" align="center">
+                                <tr>
+                                    <th>Player</th>
+                                    <th>Prediction</th>
+                                    <th>Points</th>
+                                </tr>
+                                <tr>
+                                    <td>You</td>
+                                    <td>
+                                        <input type="range" id="pred1Bar" name="pred1Bar" min="0.0" max="1.0" step="0.1" value="0.5">
+                                        <output id="pred1Box" name="pred1Box" for="pred1Bar">0.5</output>
+                                        <!--<input type="number" id="pred1Box" name="predBox" min="0.00" max="1.0" step="0.01" value="0.50" required>-->
+                                    </td>
+                                    <td>
+                                        <input type="number" id="bet1" name="bet1Box" min="0" max="25" step="1" value="10">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Alice</td>
+                                    <td>
+                                        <input type="range" id="pred2Bar" name="pred2Bar" min="0.0" max="1.0" step="0.1" value="0.5">
+                                        <output id="pred2Box" name="pred2Box" for="pred2Bar">0.5</output>
+                                    </td>
+                                    <td>
+                                        <input type="number" id="bet2" name="bet2Box" min="0" max="25" step="1" value="10">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Bob</td>
+                                    <td>
+                                        <input type="range" id="pred3Bar" name="pred3Bar" min="0.0" max="1.0" step="0.1" value="0.5">
+                                        <output id="pred3Box" name="pred3Box" for="pred3Bar">0.5</output>
+                                    </td>
+                                    <td>
+                                        <input type="number" id="bet3" name="bet3Box" min="0" max="25" step="1" value="10">
+                                    </td>
+                                </tr>
+                            </table>
+                            <br>
+                            <div id="submitArea">
+                                <button type="submit" class="btn" id="submit"> Go </button>
+                                <!--<h4 align="center">Your prediction is {{worker_forecast}}. Your total bet is {{worker_bet}}.</h4>-->
+                    </div>
+                    </form>
+                    </h4>
+    </div>
+    </td>
+    <td width="65%" style="padding: 5px; background: #FFFFFF;">
+        <div id="resultArea" style="border: 1 inset;text-align: center; margin: 5px; padding: 10px;">
+            <h4> <strong>Result</strong></h4>
+            <table class="nobordertable">
+                <tr>
+                    <td>
+                        <h5 id="echoPred" style="text-align: left;"> Please first specify the inputs on the left panel.</h5>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div id="betStrategy" align="center" style="visibility: hidden;">
+                            <!--
+                            <h5> In the pari-mutuel betting calculated by the proxy: </h5>
+                            <h5>
+                                    &nbsp;&bull;&nbsp;&nbsp;You put ${{posBet}} on that X will happen and ${{negBet}} on the opposite.<br>
+                                    &nbsp;&bull;&nbsp;&nbsp;Alice puts ${{bot1posBet}} on that X will happen and ${{bot1negBet}} on the opposite.<br>
+                                    &nbsp;&bull;&nbsp;&nbsp;Bob puts ${{bot2posBet}} on that X will happen and  ${{bot2negBet}} on the opposite.<br>
+                                </h5>
+                            -->
+                            <h5>
+                                From this event: <br>
+                                If the price went up, you <strong id="netGain1" style="color: red;"></strong> <strong id="netLose1" style="color: green;"></strong> points. You have a total of <strong style="color: blue;">{{pay1}}</strong> points at the end of this game.<br>
+                                If the price didn't go up, you <strong id="netGain2" style="color: red;"></strong> <strong id="netLose2" style="color: green;"></strong> points. You have a total of <strong style="color: blue;">{{pay2}}</strong> points at the end of this game.
+                                </h5>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </td>
+    </tr>
+    </table>
+    <br>
+    <div id="buttonArea" style="text-align: center;">
+        <button href="" class="btn" id="prevBtn"> &lt;&lt; Prev</button>
+        &nbsp;
+        <button href="" class="btn" id="nextBtn">Next &gt;&gt;</button>
+    </div>
+    <!--div id="enterRealTask" align="center" style="visibility: hidden;">
+        <button type="button" class="btn" id="enter-forecast-btn-util">
+            Real Tasks
+        </button>
+    </div-->
+    </div>
+</template>

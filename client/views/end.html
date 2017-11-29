@@ -1,13 +1,55 @@
 <template name="end">
-	<div class="instruction">
-		<h5><strong>Thanks for taking our HIT!</strong></h5>
-		<br>
-		<p>Do you have any comments for us? (e.g. Did you find the game interesting? Did you notice any bugs?)</p>
-		<br>
-		<p>Remember that your bonus will be calculated and sent out later</p>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<textarea cols="90" rows="8" name="comment" id="comment"></textarea>
-		<br><br>
-
-	</div>
-	<a href="" class="btn" id="end-btn">Submit</a>
+    <div class="instruction">
+        <h4><strong>Thanks for completing the tasks!</strong></h4>
+        <br>
+        <form id="feedbackForm" onSubmit="return false" style="color: black;">
+            <ol>
+                <li>
+                    <h5> <span style="color: red;">*</span><strong>Did you enjoy this HIT?</strong><br>
+                <input type="radio" name="enjoyGame" value="5" required> 5 (Most)&nbsp;&nbsp;
+                <input type="radio" name="enjoyGame" value="4"> 4 &nbsp;&nbsp;
+                <input type="radio" name="enjoyGame" value="3"> 3 &nbsp;&nbsp;
+                <input type="radio" name="enjoyGame" value="2"> 2 &nbsp;&nbsp;
+                <input type="radio" name="enjoyGame" value="1"> 1 (Least)&nbsp;&nbsp;<br></h5></li>
+                <li>
+                    <h5> <span style="color: red;">*</span><strong>Were the explanations clear to you?</strong><br>
+                <input type="radio" name="trainClear" value="5" required> 5 (Most)&nbsp;&nbsp;
+                <input type="radio" name="trainClear" value="4"> 4 &nbsp;&nbsp;
+                <input type="radio" name="trainClear" value="3"> 3 &nbsp;&nbsp;
+                <input type="radio" name="trainClear" value="2"> 2 &nbsp;&nbsp;
+                <input type="radio" name="trainClear" value="1"> 1 (Least)&nbsp;&nbsp;<br></h5></li>
+                <li id="trainPartLi">
+                    <h5> <span style="color: red;">*</span><strong>Which part of the tutorial was most helpful for you to understand the mechanism of the forecasting game?</strong><br>
+                <input type="radio" name="bestTrainPart" value="1" required> Step 1. Forecast Game&nbsp;&nbsp;
+                <input type="radio" name="bestTrainPart" value="2"> Step 2. Reward Mechanism&nbsp;&nbsp;
+                <input type="radio" name="bestTrainPart" value="3"> Step 3. Calculator&nbsp;&nbsp;
+                <input type="radio" name="bestTrainPart" value="4"> No, I still cannot understand the it well.&nbsp;&nbsp;<br></h5></li>
+                <li id="predictionLi">
+                    <h5> <span style="color: red;">*</span><strong>How did you make your predictions? Select the option that best describes how you made your decision.</strong><br>
+                <input type="radio" name="predMethod" value="1" required> Search the Internet&nbsp;&nbsp;
+                <input type="radio" name="predMethod" value="2"> Only use my own knowledge&nbsp;&nbsp;
+                <input type="radio" name="predMethod" value="3"> Ramdonly guess&nbsp;&nbsp;<br>
+                <input type="radio" name="predMethod" value="4"> Others&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" size="80" name="otherPredMethod" id="otherPredMethod" placeholder="Specify your method here">
+                <br></h5></li>
+                <li id="allocateLi">
+                    <h5> <strong>How did you allocate your experimental points across events?<br></strong>
+                <textarea cols="90" rows="3" name="allocateMethod" id="allocateMethod"></textarea>
+                </h5></li>
+                <li><h5> <strong>Do you have any comments for us? (e.g. Did any aspect of the experiment annoy you? Did you notice any bug?)<br></strong>
+                <textarea cols="90" rows="8" name="comment" id="comment"></textarea>
+                </h5></li>
+            </ol>
+            <br>
+            <!--div style="text-align: center;">
+                <h5 style="text-align: center;"> Do you have any comments for us? (e.g. Did there anything annoy you? Did you notice any bugs?)</h5>
+                <textarea cols="90" rows="8" name="comment" id="comment"></textarea>
+                <br>
+                <br>
+            </div-->
+            <div id="buttonArea" style="text-align: center;">
+            <button type="submit" href="" class="btn" id="submit">Submit</button>
+        </div>
+        </form>
+    </div>
 </template>

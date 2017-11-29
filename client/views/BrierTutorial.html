@@ -1,0 +1,30 @@
+<template name="BrierTutorial">
+    <div id="welcome-instruction" class="instruction">
+        <h3 style="text-align: center;"> <strong>Score Method</strong></h3>
+        <h5>For each event, we will use a scoring function, namely the Brier score, to evaluate your prediction. Consider the following question:
+        </h5>
+        <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong><em>Will Google stock price go up after Thanksgiving?</em></strong></h5>
+        <h5>
+        Suppose that you predicted the above event to happen with probability 0.6, and it not to happen with probability 0.4. Then if the event indeed happened, you will receive a score of</h5>
+        <h5>
+        <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1- (1-0.6)*(1-0.6) = 0.84 points</strong></h5>
+        <h5>
+        And if it didn't happen, you will receive a score</h5>
+        <h5>
+        <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1- (1-0.4)*(1-0.4) = 0.64 points</strong></h5>
+        <h5>
+        We will multiple 6.6667 to your score as your bonus payment in cents. For example, if you get 0.84 points, you will receive 0.84 * 6.6667 = 5.60 cents for your prediction on this event. <br>
+        <br>
+        The table below shows bonus payment (in cents) for different predictions according to this scoring method:</h5>
+        <div style="text-align: center;">
+        <img src="/images/BrierScoreTable.jpg" width="80%" />
+        </div>
+    </div>
+    <div id="buttonArea" style="text-align: center;">
+        <button href="" class="btn" id="prevBtn"> &lt;&lt; Prev</button>
+        &nbsp;
+        <button href="" class="btn" id="nextBtn" style="width: 180px;">Start Prediction!</button>
+        <br>
+        <br>
+    </div>
+</template>

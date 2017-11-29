@@ -1,4 +1,3 @@
-import sys
 import numpy as np
 import scores as sc
 from scipy import optimize as opt
@@ -35,6 +34,74 @@ def no_arbitage_wagering(forecasts, wagers, f_norm=f_norm_Brier_subgradient):
     scores = (sc.Brier_score(P_matrix, b=0.5, a=-0.5) -
               sc.Brier_score(P_bar_matrix, b=0.5, a=-0.5))
     return coefficient[:, None] * scores
+
+def surrogate_score(s1, s0, e1, e0, outcome):
+    if outcome == 0:
+        return ((1 - e1) * s0 - e0 * s1) / (1 - e0 -e1)
+    else:
+        return ((1 - e0) * s1 - e1 * s0) / (1 - e0 -e1)
+
+
+def surrogate_NAWM(forecasts, wagers, f_norm=f_norm_Brier_subgradient, e1=0.25, e0=0.25):
+    # forecasters - the predicted probability of a binary random variable
+    #               by each forecasters
+    # f_norm - f_norm_function()
+    # !!! requires normalizing the range of score rule to [0,1]
+    # e1, e0 - outcome-flipped rate under outcome 1 and 0
+    if np.ndim(forecasts) > 1:
+        print("No_arbitage_wagering(): forecasters dimension error!")
+        return 0
+
+    n = np.shape(forecasts)[0]
+    w = wagers
+    sum_w = np.sum(w)
+    p = forecasts
+    P_matrix = np.column_stack((p, 1 - p))
+    coefficient = np.multiply(w, sum_w - w) / sum_w
+    p_bar = np.zeros(n)
+    for i in range(n):
+        w_zero_i = np.array(w)
+        w_zero_i[i] = 0
+        p_bar[i] = f_norm(p, w_zero_i)
+    P_bar_matrix = np.column_stack((p_bar, 1 - p_bar))
+
+    # if the outcome is 1:
+    score1 = np.zeros(n)
+    for i in range(n):
+        tmp1= sc.Brier_score(P_matrix[i, :].reshape(1, -1), b=0.5, a=-0.5)
+        tmp2 = sc.Brier_score(P_bar_matrix[i, :].reshape(1, -1), b=0.5, a=-0.5)
+        s1 = tmp1[0, 0]
+        s0 = tmp1[0, 1]
+        avg_s1 = tmp2[0, 0]
+        avg_s0 = tmp2[0, 1]
+        if (np.random.rand() < e1): # outcome flipped to 0
+            score1[i] = (surrogate_score(s1=s1, s0=s0, e1=e1, e0=e0, outcome=0)
+                         - surrogate_score(s1=avg_s1, s0=avg_s0, e1=e1, e0=e0, outcome=0)
+                        )
+        else: 
+            score1[i] = (surrogate_score(s1=s1, s0=s0, e1=e1, e0=e0, outcome=1)
+                         - surrogate_score(s1=avg_s1, s0=avg_s0, e1=e1, e0=e0, outcome=1)
+                        )
+
+    # if the outcome is 0:
+    score0 = np.zeros(n)
+    for i in range(n):
+        tmp1= sc.Brier_score(P_matrix[i, :].reshape(1, -1), b=0.5, a=-0.5)
+        tmp2 = sc.Brier_score(P_bar_matrix[i, :].reshape(1, -1), b=0.5, a=-0.5)
+        s1 = tmp1[0, 0]
+        s0 = tmp1[0, 1]
+        avg_s1 = tmp2[0, 0]
+        avg_s0 = tmp2[0, 1]
+        if (np.random.rand() < e1): # outcome flipped to 1
+            score0[i] = (surrogate_score(s1=s1, s0=s0, e1=e1, e0=e0, outcome=1)
+                         - surrogate_score(s1=avg_s1, s0=avg_s0, e1=e1, e0=e0, outcome=1)
+                        )
+        else: 
+            score0[i] = (surrogate_score(s1=s1, s0=s0, e1=e1, e0=e0, outcome=0)
+                         - surrogate_score(s1=avg_s1, s0=avg_s0, e1=e1, e0=e0, outcome=0)
+                        )
+
+    return coefficient[:, None] * np.vstack((score1, score0)).T
 
 
 def PPM_potiential_func(x, p, b):
@@ -127,7 +194,7 @@ def PPM_jac_feasible_constraint(x, w, m):
 def proxy_parimutuel_eq(forecasts, wagers, maxiter=1000):
     n, d = np.shape(forecasts)
 
-    PPM_x0 = np.ones((n * d,)) / d
+    PPM_x0 = np.repeat(wagers / np.sum(wagers), d)
 
     PPM_cons = ({'type': 'ineq',
                  'fun': PPM_postive_constraint,

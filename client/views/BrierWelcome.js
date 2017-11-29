@@ -1,4 +1,4 @@
-Template.welcome.events={
+Template.BrierWelcome.events={
 	'click #nextBtn': function(event, template){
 		event.preventDefault();
 		if (assignment_Id == "ASSIGNMENT_ID_NOT_AVAILABLE")
@@ -14,13 +14,13 @@ Template.welcome.events={
 			}
 			else
 			{
-				Router.go('/consent');
+				Router.go('/BrierConsent');
 			}
 		}
 	}
 };
 
-Template.welcome.rendered = function(){
+Template.BrierWelcome.rendered = function(){
 	if (assignment_Id == "ASSIGNMENT_ID_NOT_AVAILABLE")
 	{
 		document.getElementById("nextBtn").innerHTML = "This is preview";
@@ -31,7 +31,7 @@ Template.welcome.rendered = function(){
     });
 };
 
-Template.welcome.created = function() {
-    timeSeries.push(Date.now().toString()+' welcome');
+Template.BrierWelcome.created = function() {
+    timeSeries.push(Date.now().toString()+' BrierWelcome');
     console.log(timeSeries);
 };

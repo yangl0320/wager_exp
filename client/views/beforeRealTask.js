@@ -1,8 +1,4 @@
-Template.training_to_real.rendered=function(){
-	$('html,body').scrollTop(0);
-};
-
-Template.training_to_real.events={
+Template.beforeRealTask.events={
   'click #prevBtn': function(event, instance) {
         event.preventDefault();
         if (assignment_Id == "ASSIGNMENT_ID_NOT_AVAILABLE") {
@@ -31,4 +27,19 @@ Template.training_to_real.events={
             }
         }
     }
+};
+
+Template.beforeRealTask.helpers({
+    initialPoints: function() {
+        return totalPoints;
+    }
+});
+
+Template.beforeRealTask.created = function() {
+    timeSeries.push(Date.now().toString()+' beforeRealTask');
+    console.log(timeSeries);
+};
+
+Template.beforeRealTask.rendered=function(){
+    $('html,body').scrollTop(0);
 };

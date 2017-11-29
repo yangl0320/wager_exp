@@ -1,0 +1,106 @@
+<template name="taskV3">
+    <!--table id="taskTable{{num}}" border="1" align="center"-->
+    <div id="taskDiv{{num}}">
+        <tr>
+            <td id="textCell{{num}}" rowspan="2" width="600">
+                <h5> {{question}}
+                <!--button class="readBtn" type="button" style="float: right;">More details</button-->
+                </h5>
+            </td>
+            <td width="50">
+                <h5> Pred. </h5>
+            </td>
+            <td width="200" style="text-align: justify;">
+                <input type="range" id="pred{{num}}Bar" name="pred{{num}}Bar" class="predBar" min="0.0" max="1.00" step="0.01" value="0.5">
+                <input type="number" id="pred{{num}}Box" name="pred{{num}}Box" class="predBox" min="0.00" max="1.00" step="0.001" required>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h5> Points </h5>
+            </td>
+            <td style="text-align: justify;">
+                <input id="bet{{num}}Box" name="bet{{num}}Box" type="number" class="betBox" min="0" max="25" step="1"  value="0"  required>
+                <h6 class='remain' style="display: inline;">&nbsp;&nbsp;&nbsp;25 points remain</h6>
+            </td>
+        </tr>
+    </div>
+    <!--/table-->
+</template>
+
+<template name="taskBrier">
+    <!--table id="taskTable{{num}}" border="1" align="center"-->
+    <div id="taskDiv{{num}}">
+        <tr>
+            <td id="textCell{{num}}" rowspan="2" width="600">
+                <h5> {{question}}
+                <!--button class="readBtn" type="button" style="float: right;">More details</button-->
+                </h5>
+            </td>
+            <td width="50">
+                <h5 style="text-align: center; margin: 0px;"> <strong> Your prediction </strong> </h5>
+            </td>
+        </tr>
+        <tr>
+            <td width="200" style="text-align: justify;">
+                <input type="range" id="pred{{num}}Bar" name="pred{{num}}Bar" class="predBar" min="0.0" max="1.00" step="0.01">
+                <input type="number" id="pred{{num}}Box" name="pred{{num}}Box" class="predBox" min="0.00" max="1.00" step="0.001" required>
+            </td>
+        </tr>
+    </div>
+    <!--/table-->
+</template>
+
+
+<template name="taskV1">
+    <table id="taskTable{{num}}" class="bordertable" align="center">
+        <tr>
+            <td id="textCell{{num}}" rowspan="2" width="600">
+                <!--<img src="/images/task{{num}}.png" id="taskImg{{num}}" align="left" width="600" height="80">-->
+                <h5> {{question}}
+                <button class="readBtn" type="button" style="float: right;">More details</button>
+                </h5>
+            </td>
+            <td width="50">
+                <h5> Prob. </h5>
+            </td>
+            <td width="200" style="text-align: justify;">
+                <input type="range" id="pred{{num}}Bar" name="pred{{num}}Bar" class="predBar" min="0.0" max="1.00" step="0.01" value="1.0" >
+                <input type="number" id="pred{{num}}Box" name="pred{{num}}Box" class="predBox" min="0.00" max="1.00" step="0.001"  value="1.0" required>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h5> {{BetName}} </h5>
+            </td>
+            <td style="text-align: justify;">
+                <input type="range" id="bet{{num}}Bar" name="bet{{num}}Bar" class="betBar" min="0.0" max="1.00" step="0.01" value="1.0">
+                <input id="bet{{num}}Box" name="bet{{num}}Box" type="number" class="betBox" min="0.00" max="1.00" step="0.01"  value="1.0"  required>
+            </td>
+        </tr>
+    </table>
+</template>
+<template name="taskV2">
+    <table id="taskTable{{num}}" class="bordertable" align="center">
+        <tr>
+            <td colspan="4">
+                <img src="/images/task{{num}}.png" id="taskImg{{num}}" align="left" width="750" height="60">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h5> Probability </h5>
+            </td>
+            <td>
+                <input type="range" id="pred{{num}}Bar" name="pred{{num}}Bar" min="0.0" max="1.00" step="0.01" value="0.5">
+                <input type="number" id="pred{{num}}Box" name="pred{{num}}Bar" min="0.00" max="1.00" step="0.001" value="0.500" required>
+            </td>
+            <td>
+                <h5> {{BetName}} </h5>
+            </td>
+            <td>
+                <input id="bet{{num}}Box" name="bet{{num}}Bar" type="number" min="0.00" max="1.00" step="0.01" required>
+            </td>
+        </tr>
+    </table>
+</template>

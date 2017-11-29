@@ -1,0 +1,133 @@
+<template name="NAWMTutorial">
+    <div id="welcome-instruction" class="instruction">
+        {{> tutoralHeader}}
+        <!--h5 style="text-align: center"> <strong>This tutoral aims to help you hit more bonus by getting you familar with the  procedure and forecasting game mechanics!</strong> </h5-->
+        <hr style="border-width: 2px; margin: 1px 0px 15px;">
+        <table class="bordertable" style="text-align: center;">
+            <tr>
+                <td width="250">Step 1. Procedure & Rules</td>
+                <td width="250" style="color: red;">Step 2. Reward Mechanism</td>
+                <td width="250">Step 3. Calculator</td>
+                <td width="150"> Finish Tutorial!</td>
+            </tr>
+        </table>
+        <br>
+        <div>
+            <h5 style="float: right;"> 
+                <!--table style="border:3px outset; border-spacing: 0px"><tr><td-->
+                    &nbsp;Suggested reading time: 3 mins&nbsp;
+                <!--/td></tr></table-->
+            </h5>
+            <h4 style="float: left;"> <strong> Reward Mechanism </strong> </h4>
+        </div>
+        <div style="clear: both;"></div>
+        <h5> Our reward mechanism determines the points you'll obtain in a forecasting game based on both your reletive prediction accuracy as well as your points allocation. To see how these two factors influence your reward, consider an example where you are in a game with another player Alice on predicting how likely <em>Google stock price will go up next week</em>.</h5>
+        <h5><strong>How does your prediction affect your reward?</strong></h5>
+        <h5> The mechanism measures your relative prediction accuracy. The more accurate you at predicting the future realized event outcome, compared with other participants of the game, the more points you win. Suppose you and Alice each allocated 10 points on this event. Alice predicted 0.7. You can slide the bar below to see how your reward changes with your prediction: </h5>
+        <div align="center">
+            <h5>
+                <table width="100%" id="predictionTable" border="1" align="center">
+                    <tr>
+                        <th>Player</th>
+                        <th>Prediction</th>
+                        <th>Points</th>
+                        <td width="65%" style="background: #FFFFFF;" rowspan="3">
+                            <strong>Reward from this event</strong>
+                            <div id="resultArea1" style="text-align: left; padding-left: 10px; visibility: hidden;">
+                                If the price went up, you <strong class="netGain1" style="color: red;"></strong> <strong class="netLose1" style="color: green;"></strong> points. You have a total of <strong class="total1" style="color: blue;">{{pay1}}</strong> points at the end of this game.<br>
+                                If the price didn't go up, you <strong class="netGain2" style="color: red;"></strong> <strong class="netLose2" style="color: green;"></strong> points. You have a total of <strong class="total2" style="color: blue;">{{pay2}}</strong> points at the end of this game.
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>You</td>
+                        <td>
+                            <input type="range" id="pred1Bar" name="pred1Bar" class="pred1Bar" min="0.0" max="1.0" step="0.1" value="0.5">
+                            <output id="pred1Box" name="pred1Box" class="pred1Box" for="pred1Bar">0.5</output>
+                        </td>
+                        <td>10</td>
+                    </tr>
+                    <tr>
+                        <td>Alice</td>
+                        <td>0.7</td>
+                        <td>10</td>
+                    </tr>
+                </table>
+            </h5>
+        </div>
+        <!--h5>By sliding the bar, you can see that if you predict 0.6 while the price doesn't go up, you can still win points as Alice's prediction 0.7 is less accurate than yours. </h5-->
+        <h5><strong>How does your point allocation influence your reward?</strong></h5>
+        <h5>In our mechanism, the more points you allocate, the more points you may win or lose. The mechanism will scale your reward according to your and others’ point allocations. In our example, suppose you predicted 0.3 and Alice predicted 0.7. You can slide the bar below to see how your reward changes with your point allocation: </h5>
+        <div align="center">
+            <h5>
+                <table width="100%" id="pointsTable" border="1" align="center">
+                    <tr>
+                        <th>Player</th>
+                        <th>Prediction</th>
+                        <th>Points</th>
+                        <td width="65%" style="background: #FFFFFF;" rowspan="3">
+                            <strong>Reward from this event</strong>
+                            <div id="resultArea2" style="text-align: left; padding-left: 10px; visibility: hidden;">
+                                If the price went up, you <strong class="netGain1" style="color: red;"></strong> <strong class="netLose1" style="color: green;"></strong> points. You have a total of <strong class="total1" style="color: blue;">{{pay1}}</strong> points at the end of this game.<br>
+                                If the price didn't go up, you <strong class="netGain2" style="color: red;"></strong> <strong class="netLose2" style="color: green;"></strong> points. You have a total of <strong class="total2" style="color: blue;">{{pay2}}</strong> points at the end of this game.
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>You</td>
+                        <td>0.3</td>
+                        <td>
+                            <input type="range" id="point1Bar" name="point1Bar" class="point1Bar" min="0.0" max="25" step="1" value="10">
+                            <output id="point1Box" name="point1Box" class="point1Box" for="point1Bar">10</output></td>
+                    </tr>
+                    <tr>
+                        <td>Alice</td>
+                        <td>0.7</td>
+                        <td>10</td>
+                    </tr>
+                </table>
+            </h5>
+        </div>
+
+
+        <!--h5> Consider now you are in a forecasting game with other two players, Alice and Bob. All of you are asked to predicte how likely "Google stock price" will go up in next week and are asked to allocate experimental points to support your own prediction. As Alice is a Google employee, she thinks that the price will go up, so she predictes 0.8 and allocates 20 points. Bob is an ordinary worker, so he searches the Internet and finds the price continuous went down in the last three days. So he predicts 0.4 and allocates 10 points. 
+            Our mechanism
+
+            As mentioned before, for each forecast question, we use the Non-arbitrage Wagering Mechanism to calcalute the final points you get from the question. This mechanism calculates the final points in two steps.
+        </h5-->
+        <!--
+        <h5>
+        <strong>Step 1. (Your relative accuracy)</strong> The mechanism waits for the outcome of the forecast question being revealed. After the outcome comes out, this mechanism uses Brier score to meature the forecast accuracy of each participents. Then, it records the difference of your forecast accuracy and the "average" forecast accuracy over all particpants as a number A. If your forecast is as accurate as the average, your A is zero. The more accurate you are, the higher A is, otherwise, the lower A is.
+        </h5>
+        <h5>
+        <strong>Step 2. (How much you bet?)</strong> The mechanism uses your points and others' points put on the question to generate a number B. B is zero, if you put zero point on this question. Otherwise, B is always positive, and the more points you put on the question compared with the other participants', the larger B is.
+        </h5>
+        <h5>
+        <strong>The final points</strong> you get from the question is calculated as <strong>A * B</strong>. <button type="button" id="example0Btn">Show example</button>
+        </h5> {{#if showExample}} {{> mechanismExample}} {{/if}}
+        -->
+        <div id="buttonArea" style="text-align: center;">
+            <button href="" class="btn" id="prevBtn"> &lt;&lt; Prev</button>
+            &nbsp;
+            <button href="" class="btn" id="nextBtn">Next &gt;&gt;</button>
+        </div>
+    </div>
+</template>
+<template name="mechanismExample">
+    <h4><strong>Example</strong></h4>
+    <h5>
+        Suppose there are three participants, you, Alice and Bob. Alice forecasts 0.6 and 0.4 for Bob. Each of them puts 10 points on the question. Following two figures show the point difference between the final points you get and the points you put on the question. In Figure (a), we fix you points put on the question as 10 points and vary the probability you forecast. In Figure (b), we fix your forecast as 0.8 and vary the points you put on the question.</h5>
+    <table class="nobordertable" align="center">
+        <tr>
+            <th width="450">
+                <img src="/images/nawm_fig_a.jpg" width="400" />
+                <br>
+                <h5 style="text-align: center;"> Figure (a)</h5>
+            </th>
+            <th width="450">
+                <img src="/images/nawm_fig_b.jpg" width="400" />
+                <h5 style="text-align: center;"> Figure (b)</h5>
+            </th>
+        </tr>
+    </table>
+</template>

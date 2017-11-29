@@ -1,0 +1,26 @@
+<template name="consent">
+    <div id="welcome-instruction" class="instruction">
+        <div id="consentDiv" style="overflow: auto; height: auto; background-color: #FFF; border: 2px inset;">
+            <div class=".visible-print" style="margin: 30px 50px 0px;">
+                <h4 align="center"> <strong> Consent for Participation </strong> </h4>
+                <!--object width="1000" height="400" data="/images/consent_Turk.pdf"></object-->
+                <p> We would like to invite you to participate in a web-based online experiment. This experiment is part of a research project whose purpose is to study how people share their information and make predictions. In the experiment, you may be asked to answer questions related to a forecasting problem, to make a prediction, or to participate in decision making games. Further instructions will be provided once you decide to participate in the experiment. A single experimental session should take no more than 20 minutes.</p>
+                <p><span style="font-weight:bold">Benefits and Risks:</span> You will be compensated with 20 cents as a base payment for participating in this experiment. Furthermore, you may be able to earn extra bonus depending on your decisions and choices and other participants’ decisions and choices in the experiment. We do not anticipate any risks from participating in this experiment. There is not direct benefit, except the payment, of participating in this experiment. Your participation will help with research on information elicitation and prediction.</p>
+                <p><span style="font-weight:bold">Privacy:</span>Your decisions and choices will be kept confidential and stored in private. Identifiable information will never be used or shared. In particular, your MTurk ID will be automatically replaced with an arbitrary alphanumeric code. In the future, the information you provide through your participation can be used in scientific publications. When sharing our findings with other researchers, we will remove all identifiable information. We will not use or share the data in any other way.</p>
+                <p><span style="font-weight:bold">Withdrawal:</span>Participation in this experiment is voluntary. You can withdraw your participation at any time by ceasing to answer questions and closing your browser. However, you will need to complete the experiment to receive payment.</p>
+                <p><span style="font-weight:bold">Contact:</span>If you have any questions, concerns or complaints about this research study, please contact the researcher for this study at <a href="mailto:social.experiments.harvard@gmail.com">social.experiments.harvard@gmail.com</a>. This research has been reviewed by the Committee on the Use of Human Subjects in Research at Harvard University. They can be reached at 617-496-2847, Richard A. and Susan F. Smith Campus Center, 1350 Massachusetts Avenue, Suite 935, Cambridge, MA 02138, or <a href="mailto:uhs@fas.harvard.edu"> cuhs@fas.harvard.edu</a>, if you (1) have any questions, concerns, complaints, (2) cannot reach the research team, (3) want to talk to someone besides the research team, or (4) have questions about your rights as a research participant. <button id="printBtn" onclick="window.print();return false;">Print</button></p>
+            </div>
+        </div>
+        <p style="margin: 20px 50px 0px;">
+            <input id="consentBox" type="checkbox"> <strong> With full knowledge of all foregoing, I agree to participate in this experiment.</strong>
+            <br><br>
+             You can save or print a copy of this screen for your record. If you agree to take part in this research, please check the box above and click the button below to start!</p>
+    </div>
+    <div id="buttonArea" style="text-align: center;">
+        <button href="" class="btn" id="prevBtn"> &lt;&lt; Prev</button>
+        &nbsp;
+        <button href="" class="btn" id="nextBtn" style="width: 150px;">Start Tutorial!</button>
+        <br>
+        <br>
+    </div>
+</template>

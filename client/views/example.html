@@ -1,40 +1,47 @@
 <template name="example">
     <div id="welcome-instruction" class="instruction">
-        <h2> Training Phrase </h2>
-        <h4> <strong> Task description: </strong>
-		<br> 
-        This training phrase aims to give you an intuitive idea about what the forecast question looks like and how the forecast elicitation mechanism works. 
-    	</h4>
-        <h4> <strong> Forecast Task </strong> </h4>
-        <h5> Our forecast task is a betting-like task, where you competes with other potential participants. The task consists of 10 questions. Each question will ask you to report a probability you think that a given event X will happen within one week. You are also asked to specify an amount of money, called bet, from the budget we assign to you, on each question to "support" the probability you forecast. Then, we will use the proxy pari-mutuel mechanism to compute your bouns, based on your proability forecast, your bet, the outcome of event X as well as the others' forecasts and bets. </h5>
-        <h4> <strong> Example question </strong> </h4>
+        {{> tutoralHeader}}
+        <!--h5 style="text-align: center"> <strong>This tutoral aims to help you hit more bonus by getting you familar with the  procedure and forecasting game mechanics!</strong> </h5-->
+        <hr style="border-width: 2px; margin: 1px 0px 15px;">
+        <table class="bordertable" style="text-align: center;">
+            <tr>
+                <td width="250" style="color: red;">Step 1. Procedure & Rules</td>
+                <td width="250">Step 2. Reward Mechanism</td>
+                <td width="250">Step 3. Calculator</td>
+                <td width="150"> Finish Tutorial!</td>
+            </tr>
+        </table>
+        <br>
+        <div>
+            <h5 style="float: right;"> 
+                <!--table style="border:3px outset; border-spacing: 0px"><tr><td-->
+                    &nbsp;Suggested reading time: 1.5 mins&nbsp;
+                <!--/td></tr></table-->
+            </h5>
+            <h4 style="float: left;"> <strong> Experimental Procedure </strong> </h4>
+        </div>
+        <div style="clear: both;"></div>
+        <h5> Our real experiment consists of three independent rounds. In each round you are given 25 experimental points and 5 real-world events to predict. For each event, you need to specify a number between 0 and 1 representing how likely you think the event will happen and state the number of experimental points that you allocate to support your forecast on this event. An example event is as follows:</h5>
         <form id="exampleForm" onSubmit="return false">
-            <table id="exampleTable" class="bordertable" align="center">
-                <tr>
-                    <td colspan="4">
-                    	<img src="/images/exampleQ.png" id="exampleImg" align="left" 
-                    	width="750" height="60">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <h5> Forecast </h5>
-                    </td>
-                    <td>
-                        <input type="range"  id="predBar" name="predBar" min="0.0" max="1.00" step="0.001" value="0.5">
-                        <input type="number"  id="predBox" name="predBox" min="0.00" max="1.00" step="0.001" value="0.5" required>
-                    </td>
-                    <td>
-                        <h5> Bet </h5>
-                    </td>
-                    <td>
-                    	<input type="number"  min="0.00" max="1.00" required>
-                    </td>
-                </tr>
+            <table id="taskTable" border="1" class="tasktable" align="center" style="border-spacing: 1px">
+                {{#each tasks}} {{>taskV3}} {{/each}}
             </table>
         </form>
+        <br>
+        <h4><strong> Forecasting Game Rules</strong></h4>
+        <h5>
+        For each event, you are participating in a forecasting game with 10~15 other participants. You may gain or lose points in the game depending on your prediction and point allocation, other participants’ predictions and point allocations, and the realized outcome of the event in the future. We will use a betting mechanism to determine how many points you win or lose in the game. The rules of the mechanism are explained in the next page. </h5>
+        <div id="buttonArea" style="text-align: center;">
+            <br>
+            <button href="" class="btn" id="prevBtn"> &lt;&lt; Prev</button>
+            &nbsp;
+            <button href="" class="btn" id="nextBtn">Next &gt;&gt;</button>
+        </div>
     </div>
-    <div id="buttonArea">
-        <a href="" class="btn" id="welcome-btn">Learn Next</a>
+</template>
+<template name="tutoralHeader">
+    <div style="margin-bottom: 0px;">
+        <h2 style="display: inline;"><strong> Toturial </strong></h2>
+        <h5 style="display: inline;"><strong></strong> &nbsp;THREE STEPS to get you familiarize with the procedure and rules of the forecasting games! </h5>
     </div>
 </template>

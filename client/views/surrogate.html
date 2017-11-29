@@ -1,0 +1,33 @@
+<template name="surrogate">
+    <div id="welcome-instruction" class="instruction">
+        {{> tutoralHeader}}
+        <!--h5 style="text-align: center"> <strong>This tutoral aims to help you hit more bonus by getting you familar with the  procedure and forecasting game mechanics!</strong> </h5-->
+        <hr style="border-width: 2px; margin: 1px 0px 15px;">
+        <table class="bordertable" style="text-align: center;">
+            <tr>
+                <td width="250">Step 1. Procedure & Rules</td>
+                <td width="250">Step 2. Reward Mechanism</td>
+                <td width="250">Step 3. Calculator</td>
+                <td width="150" style="color: red;"> Finish Tutorial!</td>
+            </tr>
+        </table>
+        <br>
+        
+        <h4>You are almost done with the tutorial. Just one more step!</h4><br>
+        <h5>
+            To make the game even more fun, we will add more randomness in the game. After we observe the outcome, we will flip the outcome with 25% of chance. After that, if the outcome stays the same, you have the chance of increasing the points that you have obtained to roughly <br>
+            <br>
+            <strong style="text-align: center;">(1-25%)/(1-25%-25%) = 1.5 times of your original points.</strong><br>
+            <br>
+            However, when the outcome is flipped, you may lose some points in some scenarios, as you will be rewarded by the opposite outcome. We however will make sure, overall, your *expected* payment stays the same. We introduce this “lottery” phase to improve the winning and losing amount that you will receive, to make the game more exciting.
+
+        </h5>
+    </div>
+    <div id="buttonArea" style="text-align: center;">
+        <button href="" class="btn" id="prevBtn"> &lt;&lt; Prev</button>
+        &nbsp;
+        <button href="" class="btn" id="nextBtn" style="width: 180px;">Start Real Game!</button>
+        <br>
+        <br>
+    </div>
+</template>

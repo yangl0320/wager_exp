@@ -1,0 +1,23 @@
+<template name="real_task">
+    <div id="welcome-instruction" class="instruction">
+        <h2 style="margin: 0 0 0px">Round {{setNum}}</h2>
+        <hr style="border-width: 2px; margin: 1px 0px 15px;">
+        <h4> In this round, you are given 25 experimental points as your budget to allocate and 5 real-world events to predict. You need to use up all 25 experiemtal points.</h4>
+        <div id="formArea" class="instruction">
+            <form id="taskForm" onSubmit="return false">
+                <table id="taskTable{{num}}" border="1" align="center" style="border-spacing: 1px">
+                    {{#each tasks}} 
+                        {{>taskV3}} 
+                    {{/each}}
+                </table>
+                <br>
+                <h5 id="allocateAllPointsWarning" style="visibility: hidden; color: red;text-align: center;"> 
+                    <strong> You haven't allocate all 100 points! </strong>
+                </h5>
+                <div id="submitArea" style="text-align: center;">
+                    <button type="submit" class="btn" id="submit" style="width: 250px"> Comfirm and go to next round </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</template>
